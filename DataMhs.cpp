@@ -83,6 +83,32 @@ void tampilkanData() {
     getch();  // Menunggu input sebelum kembali ke menu
 }
 
+void updateData() {
+    system("cls");  // Clear screen sebelum update data
+    if (pos == -1) {
+        cout << "\nTidak ada data mahasiswa untuk diupdate.\n";
+        return;
+    }
+    string nim;
+    cout << "\nMasukkan NIM mahasiswa yang ingin diupdate: ";
+    cin.ignore(); // Menghindari masalah dengan buffer input
+    getline(cin, nim);
+    int index = cariDataByNIM(nim);
+    if (index != -1) {
+        cout << "\nMasukkan data baru untuk mahasiswa dengan NIM " << nim << ":\n";
+        cout << "Nama: ";
+        getline(cin, dataMahasiswa[index].nama);
+        cout << "Alamat: ";
+        getline(cin, dataMahasiswa[index].alamat);
+        cout << "Tanggal Lahir (DD/MM/YYYY): ";
+        getline(cin, dataMahasiswa[index].tanggalLahir);
+        cout << "IPK: ";
+        cin >> dataMahasiswa[index].ipk;
+    } else {
+        cout << "\nMahasiswa dengan NIM " << nim << " tidak ditemukan.\n";
+    }
+}
+
 int main() {
 char pl;
 do
@@ -99,7 +125,7 @@ do
     /* code */ 
     break;  
    case '3':
-
+   updateData();
     /* code */
     break;  
    case '4':
