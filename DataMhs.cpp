@@ -109,6 +109,34 @@ void updateData() {
     }
 }
 
+void hapusData() {
+    system("cls");  // Clear screen sebelum menghapus data
+    if (pos == -1) {
+        cout << "\nTidak ada data mahasiswa untuk dihapus.\n";
+        return;
+    }
+    string nim;
+    cout << "\nMasukkan NIM mahasiswa yang ingin dihapus: ";
+    cin.ignore(); // Menghindari masalah dengan buffer input
+    getline(cin, nim);
+    int index = cariDataByNIM(nim);
+    if (index != -1) {
+        for (int i = index; i < pos; i++) {
+            dataMahasiswa[i] = dataMahasiswa[i + 1];
+        }
+        pos--;
+        cout << "\nData berhasil dihapus!\n";
+    } else {
+        cout << "\nMahasiswa dengan NIM " << nim << " tidak ditemukan.\n";
+    }
+}
+bool konfirmasiKeluar() {
+    char pilihan;
+    cout << "\nApakah Anda yakin ingin keluar? (y/n): ";
+    cin >> pilihan;
+    return (pilihan == 'y' || pilihan == 'Y');
+}
+
 int main() {
 char pl;
 do
@@ -129,7 +157,7 @@ do
     /* code */
     break;  
    case '4':
-
+   hapusData();
     /* code */
     break;  
   case '5':
